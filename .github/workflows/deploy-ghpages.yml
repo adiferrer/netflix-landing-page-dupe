@@ -1,16 +1,40 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is deploying to GitHub Pages 🚀
-on: [push]
+name: Deploy GH Pages
+
+# Informative job name
+run-name: Deploying to GH Pages using ${{ github.actor }} ️
+
+on:
+  # Trigger on push events to the main branch
+  push:
+    branches: [ main ]
+
 jobs:
   Deploy-GHPages:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v3
-      - run: git config --global user.email "adiferrer@gmail.com"
-      - run: git config --global user.name "adiferrer"
-      - name: Deploy subfolder
+      - uses: actions/checkout@v3
+        with:
+          # Fetch all branches and tags to ensure subtree push works correctly
+          fetch-depth: 0
+
+      - name: Configure Git user information (optional)
+        # Uncomment if you don't have global Git config set up
+        run: |
+          git config --global user.email "adiferrer@gmail.com"
+          git config --global user.name "adiferrer"
+
+      - name: Install required dependencies (if needed)
+        # Run commands to install specific tools used during deployment (optional)
+        # Example: for Node.js projects, use `run: npm install`
+
+      - name: Build your project (if applicable)
+        # Run commands to build your project and generate the `dist` folder
+        # Example: for a React project, use `run: npm run build`
+
+      - name: Deploy subfolder with subtree push
         uses: peaceiris/actions-gh-pages@v3
-        with: 
+        with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: dist
+          # Explicitly include subtree push functionality
+          subtree: true
