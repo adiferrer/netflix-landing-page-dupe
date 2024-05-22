@@ -7,7 +7,8 @@ module.exports = {
   entry: './src/index.js',
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Netflix Dupe',
+      title: 'Netflix Philippines - Watch TV Shows Online, Watch Movies Online',
+      favicon: 'src/assets/icons/nficon2016.ico'
     }),
   ],
   output: {
