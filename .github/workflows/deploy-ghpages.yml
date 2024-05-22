@@ -1,0 +1,29 @@
+name: GitHub Pages Deployment
+
+on: [push]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build Project
+        run: |
+          npm install
+          npm run build
+
+      - name: Configure Git user (optional)
+        run: |
+          git config --global user.email "adiferrer@gmail.com"
+          git config --global user.name "adiferrer" 
+
+      - name: Deploy subfolder with Actions GH Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist 
+
+      - name: Verify deployment
+        run: |
+          echo "Deployment completed successfully!"
