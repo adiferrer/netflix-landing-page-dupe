@@ -4,7 +4,7 @@
 	--primary-color: #e50914;
 	--dark-color: #141414;
 	--light-color: #f4f4f4;
-    --input-color: #626160;
+    --input-color: #333;
 }
 
 * {
@@ -45,18 +45,59 @@ p {
 button {
     padding: 0.5em 1em;
     border: none;
+    color: white;
+    cursor: pointer;
+}
+
+button:not(.faq-collapsible) {
     border-radius: 6px;
     background-color: var(--primary-color);
+}
+
+nav select,
+form > input {
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: var(--input-color) 1px solid;
     color: white;
 }
 
-.hero-section {
-    width: 100%;
-    height: 80vh;
-    padding: 1.5em 13em;
-    border-bottom: 7px solid #333;
+select:focus,
+form > input:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 2px white;
 }
 
+.header-container,
+.subhero-container,
+.faq-hero {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 7px solid var(--input-color);
+}
+
+.subhero-text {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero-section {
+    width: 80vw;
+    height: 80vh;
+    padding: 1.5em;
+}
+
+.form-paragraph {
+    margin-bottom: 0.8em;
+    text-align: center;
+}
+
+/* Header Hero */
 header {
     position: relative;
     background: url('assets/images/PH-en-20240513-popsignuptwoweeks-perspective_alpha_website_large.jpeg') no-repeat center center/cover;
@@ -90,15 +131,7 @@ nav > div {
 }
 
 nav select {
-    background-color: rgba(0, 0, 0, 0.4);
-    color: white;
-    border: var(--input-color) 1px solid;
     padding: 0.5em 1em;
-    border-radius: 6px;
-}
-
-select:focus {
-    outline: none;
 }
 
 nav button {
@@ -107,7 +140,7 @@ nav button {
     cursor: pointer;
 }
 
-header > div {
+header > .hero-section > div {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -115,18 +148,18 @@ header > div {
     height: 100%;
 }
 
-header > div > h1,
-header > div > h2 {
+header > .hero-section > div > h1,
+header > .hero-section > div > h2 {
     text-align: center;
     margin-bottom: 0.5em;
 }
 
-header > div > p {
+header > .hero-section > div > p {
     text-align: center;
     margin-bottom: 1em;
 }
 
-header > div > form {
+form {
     width: 100%;
     height: 56px;
     display: flex;
@@ -135,23 +168,14 @@ header > div > form {
     gap: 1em;
 }
 
-header > div > form > input {
+form > input {
     font-size: 1em;
     height: 100%;
     width: 400px;
     padding: 0 1em;
-    border-radius: 6px;
-    background-color: rgba(0, 0, 0, 0.6);
-    border: var(--input-color) 1px solid;
-    color: white;
 }
 
-header > div > form > input:focus {
-    outline: none;
-    box-shadow: inset 0 0 0 2px white;
-}
-
-header > div > form > button {
+form > button {
     height: 100%;
     background-color: var(--primary-color);
     font-size: 1em;
@@ -164,6 +188,58 @@ footer {
     padding: 1.5em 13em;
 }
 
+/* FAQ */
+.faq-hero .hero-section {
+    height: max-content;
+}
+
+.faq-hero h2 {
+    font-size: 1.5em;
+}
+
+.faq-questions {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 100%;
+    margin: 1em 0;
+}
+
+.faq-question {
+    width: 100%;
+}
+
+.faq-collapsible {
+    width: 100%;
+    background-color: var(--input-color);
+    padding: 18px;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+
+.faq-collapsible:hover {
+    background-color: #656565;
+}
+
+.question-answer {
+    padding: 0 18px;
+    border-top: var(--dark-color) 1px solid;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: var(--input-color);
+}
+
+.question-answer h2 {
+    padding: 1em 0;
+}
+
+.faq-hero .form-container {
+    padding: 1.5em 0;
+}
+
+/* Footer */
 .footnote p {
     font-size: 15px;
     text-align: center;
@@ -206,19 +282,19 @@ footer {
         box-shadow: inset 60px 50px 125px #000000, inset -60px -50px 125px #000000;
     }
 
-    header > div > form {
+    form {
         flex-direction: column;
         gap: 1em;
         height: max-content;
     }
 
-    header > div > form > input {
+    form > input {
         width: 100%;
         font-size: 15px;
         padding: 0.5em 1em;
     }
 
-    header > div > form > button {
+    form > button {
         width: 100%;
     }
 }
